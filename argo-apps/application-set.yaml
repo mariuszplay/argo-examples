@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-app-set-helm
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/mariuszplay/argo-examples
+        revision: HEAD
+        directories:
+          # here it will read the paths under configs and the subpaths under the config paths
+          - path: config/*
+  template:
+    metadata:
+      namespace: argocd
+      # you can use the path strings with / delimiter as variables
+      name: "helm-webapp-{{path.basename}}"
+    spec:
+      project: default
+      source:
+        helm:
+          # specify different values file based on directories variables
+          valueFiles:
+            - "config/{{path.basename}}/values.yaml"
+        path: helm-webapp
+        repoURL: https://github.com/mariuszplay/argo-examples
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+      destination:
+        # specify different destinations
+        namespace: "pelkam-{{path.basename}}"
+        server: https://kubernetes.default.svc
