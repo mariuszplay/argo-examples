@@ -3,6 +3,9 @@ kind: ApplicationSet
 metadata:
   name: demo-app-set-helm
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+
 spec:
   generators:
     - git:
@@ -29,10 +32,10 @@ spec:
           targetRevision: HEAD
           ref: values
       syncPolicy:
+        preserveResourcesOnDeletion: true
         syncOptions:
           - CreateNamespace=true
-        automated:
-          prune: true
+          - PrunePropagationPolicy=orphan
       destination:
         # specify different destinations
         namespace: "pelkam-{{path.basename}}"
