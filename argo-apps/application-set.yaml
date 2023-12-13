@@ -18,14 +18,16 @@ spec:
       name: "helm-webapp-{{path.basename}}"
     spec:
       project: default
-      source:
-        helm:
-          # specify different values file based on directories variables
-          valueFiles:
-            - "config/{{path.basename}}/values.yaml"
-        path: helm-webapp
-        repoURL: https://github.com/mariuszplay/argo-examples
-        targetRevision: HEAD
+      sources:
+        - repoURL: https://github.com/mariuszplay/argo-examples
+          targetRevision: HEAD
+          helm:
+            valueFiles:
+              - "$values/config/{{path.basename}}/values.yaml"
+          path: helm-webapp
+        - repoURL: https://github.com/mariuszplay/argo-examples
+          targetRevision: HEAD
+          ref: values
       syncPolicy:
         automated:
           prune: true
