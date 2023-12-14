@@ -5,7 +5,6 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-options: Prune=false
-
 spec:
   generators:
     - git:
@@ -14,6 +13,8 @@ spec:
         directories:
           # here it will read the paths under configs and the subpaths under the config paths
           - path: config/*
+  syncPolicy:
+    preserveResourcesOnDeletion: true
   template:
     metadata:
       namespace: argocd
@@ -32,7 +33,6 @@ spec:
           targetRevision: HEAD
           ref: values
       syncPolicy:
-        preserveResourcesOnDeletion: true
         syncOptions:
           - CreateNamespace=true
           - PrunePropagationPolicy=orphan
