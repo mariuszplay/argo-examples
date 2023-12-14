@@ -1,0 +1,1 @@
+# This directory cointains images for ilustrations and readmes.
