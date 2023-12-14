@@ -43,6 +43,8 @@ Hit save and do the same for rest of child Applications. Once completed, the sta
 
 ![Step 3. Delete old ApplicationSet](img/rename-05.png)
 
+## Delete old ApplicationSet
+
 Now you can delete 'demo-app-set-helm'. Do this in non-cascading mode for safety:
 
 ![Step 3. Delete old ApplicationSet](img/rename-06.png)
