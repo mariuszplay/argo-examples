@@ -21,7 +21,7 @@ spec:
   syncPolicy:
     preserveResourcesOnDeletion: true
 ```
-
+In our demo we are using ArgoCD Application 'app-syncer', [view it for here reference](argo-app-syncer/app-syncer.yaml), which is responsible only for syncing ApplicationSet changes to cluster.
 # Renaming process
 
 ## Change ApplicationSet name and perform sync
@@ -39,4 +39,14 @@ Change ownerReferences name and uid values so that they point to the new 'extern
 
 ![Step 2. Edit live manifest in child Applications](img/rename-04.png)
 
-Hit save and do the same for rest of child Applications.
+Hit save and do the same for rest of child Applications. Once completed, the state of 'external-demo-app-set-helm' ApplicationSet should change to Healthy:
+
+![Step 3. Delete old ApplicationSet](img/rename-05.png)
+
+Now you can delete 'demo-app-set-helm'. Do this in non-cascading mode for safety:
+
+![Step 3. Delete old ApplicationSet](img/rename-06.png)
+
+Once done, all your ApplicationSet and Applications should be in Healthy state. You successfully renamed ApplicationSet without touching any child Applications.
+
+![Step 3. Delete old ApplicationSet](img/rename-07.png)
