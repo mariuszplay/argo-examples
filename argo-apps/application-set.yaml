@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: external-demo-app-set-helm
+  name: demo-app-set-helm
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-options: Prune=false
