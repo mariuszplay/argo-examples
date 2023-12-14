@@ -29,3 +29,14 @@ Change ApplicationSet /metadata/name value from 'demo-app-set-helm' to 'external
 ![Step 1. Degraded state when ArgoCD tries to switch between old and new ApplicationSet](img/rename-01.png)
 As you can see, both old and new ApplicationSets are present in UI. Please note, that when you go into 'external-demo-app-set-helm' ApplicationSet details you will see error message saying, that child Application 'helm-webapp-dev' is owned by another ApplicationSet 'demo-app-set-helm' - the one with old name.
 ![Step 1. Degrade state, error message of new ApplicationSet](img/rename-02.png)
+
+## Update ownerReferences in child Applications
+Go to Application 'helm-webapp-dev' details and edit live manifest:
+
+![Step 2. Edit live manifest in child Applications](img/rename-03.png)
+
+Change ownerReferences name and uid values so that they point to the new 'external-demo-app-set-helm' ApplicationSet. Get uid value from 'external-demo-app-set-helm' ApplicationSet details:
+
+![Step 2. Edit live manifest in child Applications](img/rename-04.png)
+
+Hit save and do the same for rest of child Applications.
