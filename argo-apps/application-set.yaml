@@ -14,6 +14,7 @@ spec:
           # here it will read the paths under configs and the subpaths under the config paths
           - path: config/*
   syncPolicy:
+    automated: {}
     preserveResourcesOnDeletion: true
   template:
     metadata:
@@ -33,6 +34,7 @@ spec:
           targetRevision: HEAD
           ref: values
       syncPolicy:
+        automated: {}
         syncOptions:
           - CreateNamespace=true
           - PrunePropagationPolicy=orphan
